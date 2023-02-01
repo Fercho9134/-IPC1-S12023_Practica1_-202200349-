@@ -2,15 +2,14 @@ package primerapracticaipc1;
 
 //No se utilizo porque en la factura se colocó la fecha 10 de febrero por default
 // import java.util.Calendar;
-
 import java.util.Scanner;
 
-public class  PrimeraPracticaIPC1{
-    
+public class PrimeraPracticaIPC1 {
+
     //constantes que almacenan las credenciales para el inicio de sesion
     final static String usuario = "cajero_202200349";
     final static String contraseña = "ipc1_202200349";
-    
+
     //scanner
     static Scanner consola = new Scanner(System.in);
 
@@ -28,7 +27,7 @@ public class  PrimeraPracticaIPC1{
     //funcion principal
     public static void main(String[] args) {
         boolean verificacion;
-        
+
         /*funcion para rellenar todas las filas de la columna cantidad vendida 
         del arreglo productos con ceros para no tener problema con la funcion que ordena el arreglo el resto se 
         djan vacias como null*/
@@ -110,168 +109,168 @@ public class  PrimeraPracticaIPC1{
             }
         }
     }
-    
+
     public static void mostrarProductos() {
-        
-        if(productos[19][0] == null){
-        
-        boolean condicion = true;
-        boolean existe = false;
-        String nombre;
-        double precio;
 
-        //Ciclo que se repetira hasta que el usuario desee salir o hasta que se agregue un producto correctamente
-        while (condicion == true) {
-            
-            //imprimir texto
-            System.out.println("\n------Agregar producto------");
-            System.out.println("*Si desea volver al menu deje el campo nombre en blanco y el precio en 0\n");
+        if (productos[19][0] == null) {
 
-            //leer nombre y precio del producto
-            System.out.print("-> Ingrese el nombre del producto: ");
-            //limpiando el scanner
-            consola.nextLine();
-            nombre = consola.nextLine();
-            
-            try{
-                
-            System.out.print("-> Ingrese el precio del producto (unicamente valor numerico sin separador de miles): ");
-            precio = consola.nextDouble();
-            
-            }catch(Exception e){
-                precio=-1;
-            }
-            //Verificando si el usuario desea salir
-            if (nombre.equals("") && precio == 0) {
-                condicion = false;
-                System.out.println("\n**Volviendo al menu...");
-                mostrarMenu();
-                break;
-                //Verificando que el precio no sea 0 y que ambos campos tengan texto   
-            } else if (nombre.equals("") || precio == 0) {
+            boolean condicion = true;
+            boolean existe = false;
+            String nombre;
+            double precio;
 
-                System.out.println("\n***Ambos campos deben tener informacion y el precio no puede ser 0");
+            //Ciclo que se repetira hasta que el usuario desee salir o hasta que se agregue un producto correctamente
+            while (condicion == true) {
 
-                //Si ambos campos tienen datos y el usuario no desea salir, verificar para agregar el nuevo producto    
-            }else if (precio<0){
-                 System.out.println("\nEl precio debe ser un valor numerico mayor a 0*");
-            } else {
+                //imprimir texto
+                System.out.println("\n------Agregar producto------");
+                System.out.println("*Si desea volver al menu deje el campo nombre en blanco y el precio en 0\n");
 
-                //ciclo para revisar que el producto ingresado no exista aun en el vector
-                for (int i = 0; i <= 19; i++) {
+                //leer nombre y precio del producto
+                System.out.print("-> Ingrese el nombre del producto: ");
+                //limpiando el scanner
+                consola.nextLine();
+                nombre = consola.nextLine();
 
-                    if (nombre.equals(productos[i][1])) {
-                        System.out.println("\n**El producto ya existía en el sistema por lo que NO se agrego");
-                        existe = true;
-                        break;
-                    } else {
-                        existe = false;
-                    }
+                try {
+
+                    System.out.print("-> Ingrese el precio del producto (unicamente valor numerico sin separador de miles): ");
+                    precio = consola.nextDouble();
+
+                } catch (Exception e) {
+                    precio = -1;
                 }
-
-                //Si el producto no existe aun, agregarlo
-                if (existe == false) {
-                    productos[contadorProductos][0] = Integer.toString(contadorProductos);
-                    productos[contadorProductos][1] = nombre;
-                    productos[contadorProductos][2] = Double.toString(precio);
-                    productos[contadorProductos][3] = "0";
-
-                    //Se cambia el estado de la condicion que mantiene al bucle ejecutandose
+                //Verificando si el usuario desea salir
+                if (nombre.equals("") && precio == 0) {
                     condicion = false;
-                    //se agrega una unidad mas al contador
-                    contadorProductos = contadorProductos + 1;
-                    System.out.println("\n**Producto agregado correctamente. Volviendo al menu");
-                    //Imprimiendo tabla con los productos que existen actualmente
-                    imprimirProductosSinCantidad();
-                    //volviendo al menu
+                    System.out.println("\n**Volviendo al menu...");
                     mostrarMenu();
+                    break;
+                    //Verificando que el precio no sea 0 y que ambos campos tengan texto   
+                } else if (nombre.equals("") || precio == 0) {
+
+                    System.out.println("\n***Ambos campos deben tener informacion y el precio no puede ser 0");
+
+                    //Si ambos campos tienen datos y el usuario no desea salir, verificar para agregar el nuevo producto    
+                } else if (precio < 0) {
+                    System.out.println("\nEl precio debe ser un valor numerico mayor a 0*");
+                } else {
+
+                    //ciclo para revisar que el producto ingresado no exista aun en el vector
+                    for (int i = 0; i <= 19; i++) {
+
+                        if (nombre.equals(productos[i][1])) {
+                            System.out.println("\n**El producto ya existía en el sistema por lo que NO se agrego");
+                            existe = true;
+                            break;
+                        } else {
+                            existe = false;
+                        }
+                    }
+
+                    //Si el producto no existe aun, agregarlo
+                    if (existe == false) {
+                        productos[contadorProductos][0] = Integer.toString(contadorProductos);
+                        productos[contadorProductos][1] = nombre;
+                        productos[contadorProductos][2] = Double.toString(precio);
+                        productos[contadorProductos][3] = "0";
+
+                        //Se cambia el estado de la condicion que mantiene al bucle ejecutandose
+                        condicion = false;
+                        //se agrega una unidad mas al contador
+                        contadorProductos = contadorProductos + 1;
+                        System.out.println("\n**Producto agregado correctamente. Volviendo al menu");
+                        //Imprimiendo tabla con los productos que existen actualmente
+                        imprimirProductosSinCantidad();
+                        //volviendo al menu
+                        mostrarMenu();
+
+                    }
 
                 }
 
             }
-
-        }
-        }else{
+        } else {
             System.out.println("\n*La lista esta llena, no se pueden agregar mas productos");
             mostrarMenu();
         }
     }
 
     public static void mostrarCupones() {
-        
-        if(productos[19][0] == null){
-        
-        boolean condicion = true;
-        boolean caracteres;
-        boolean existe = false;
-        String cupon;
-        double descuento;
-        double decimal;
 
-        //Ciclo que se repetira hasta que el usuario desee salir o hasta que se agregue un cupon valido
-        while (condicion == true) {
-            System.out.println("\n------Agregar cupon------");
-            System.out.println("*Si desea volver al menu coloque un numero 0 en el campo cupon y porcentaje\n");
+        if (productos[19][0] == null) {
 
-            //leer nombre y porcentaje del cupon
-            System.out.print("-> Ingrese el codigo del cupon (unicamente 4 caracteres): ");
-            //limpiando el scanner
-            consola.nextLine();
-            cupon = consola.nextLine();
-            System.out.print("-> Ingrese el valor numerico (Entre 0 y 100) del porcentaje de descuento que otorga este cupon (sin simbolo %): ");
-            descuento = consola.nextDouble();
+            boolean condicion = true;
+            boolean caracteres;
+            boolean existe = false;
+            String cupon;
+            double descuento;
+            double decimal;
 
-            //verificando restricciones
-            if (cupon.equals("0") && descuento == 0) {
-                condicion = false;
-                System.out.println("\n**Volviendo al menu...");
-                mostrarMenu();
-                break;
-            } else {
-                caracteres = contarCaracteres(cupon);
-                decimal = obtenerDecimal(descuento);
-            }
-            //Si ambas restricciones se cumplen proseguir con el proceso de agregar un cupon
-            if (caracteres == true && decimal > 0 && decimal < 1) {
-                
-                for (int i = 0; i <= 19; i++) {
-                    //Revisar si el cupon ya existe
-                    if (cupon.equals(cupones[i][1])) {
-                        System.out.println("\n**El cupon ya existía en el sistema por lo que NO se agrego");
-                        existe = true;
+            //Ciclo que se repetira hasta que el usuario desee salir o hasta que se agregue un cupon valido
+            while (condicion == true) {
+                System.out.println("\n------Agregar cupon------");
+                System.out.println("*Si desea volver al menu coloque un numero 0 en el campo cupon y porcentaje\n");
 
-                        break;
-                    } else {
-                        existe = false;
+                //leer nombre y porcentaje del cupon
+                System.out.print("-> Ingrese el codigo del cupon (unicamente 4 caracteres): ");
+                //limpiando el scanner
+                consola.nextLine();
+                cupon = consola.nextLine();
+                System.out.print("-> Ingrese el valor numerico (Entre 0 y 100) del porcentaje de descuento que otorga este cupon (sin simbolo %): ");
+                descuento = consola.nextDouble();
+
+                //verificando restricciones
+                if (cupon.equals("0") && descuento == 0) {
+                    condicion = false;
+                    System.out.println("\n**Volviendo al menu...");
+                    mostrarMenu();
+                    break;
+                } else {
+                    caracteres = contarCaracteres(cupon);
+                    decimal = obtenerDecimal(descuento);
+                }
+                //Si ambas restricciones se cumplen proseguir con el proceso de agregar un cupon
+                if (caracteres == true && decimal > 0 && decimal < 1) {
+
+                    for (int i = 0; i <= 19; i++) {
+                        //Revisar si el cupon ya existe
+                        if (cupon.equals(cupones[i][1])) {
+                            System.out.println("\n**El cupon ya existía en el sistema por lo que NO se agrego");
+                            existe = true;
+
+                            break;
+                        } else {
+                            existe = false;
+
+                        }
+                    }
+                    //Si no existe, agregarlo
+                    if (existe == false) {
+
+                        cupones[contadorCupones][0] = Integer.toString(contadorCupones);
+                        cupones[contadorCupones][1] = cupon;
+                        cupones[contadorCupones][2] = Double.toString(descuento);
+
+                        //Se cambia el estado de la condicion que mantiene al bucle ejecutandose
+                        condicion = false;
+                        //se agrega una unidad mas al contador
+                        contadorCupones = contadorCupones + 1;
+                        System.out.println("\n**Cupon agregado correctamente. Volviendo al menu");
+                        //Imprimiendo tabla con los productos que existen actualmente
+
+                        imprimirCupones();
+                        //volviendo al menu
+                        mostrarMenu();
 
                     }
-                }
-                //Si no existe, agregarlo
-                if (existe == false) {
 
-                    cupones[contadorCupones][0] = Integer.toString(contadorCupones);
-                    cupones[contadorCupones][1] = cupon;
-                    cupones[contadorCupones][2] = Double.toString(descuento);
-
-                    //Se cambia el estado de la condicion que mantiene al bucle ejecutandose
-                    condicion = false;
-                    //se agrega una unidad mas al contador
-                    contadorCupones = contadorCupones + 1;
-                    System.out.println("\n**Cupon agregado correctamente. Volviendo al menu");
-                    //Imprimiendo tabla con los productos que existen actualmente
-
-                    imprimirCupones();
-                    //volviendo al menu
-                    mostrarMenu();
-
+                } else {
+                    System.out.println("\n**El codigo del cupon no tiene 4 caracteres o el porcentaje no esta entre 0 y 100");
                 }
 
-            } else {
-                System.out.println("\n**El codigo del cupon no tiene 4 caracteres o el porcentaje no esta entre 0 y 100");
             }
-
-        }
-        }else{
+        } else {
             System.out.println("\n*La lista esta llena, no se pueden agregar mas cupones");
             mostrarMenu();
         }
@@ -289,7 +288,7 @@ public class  PrimeraPracticaIPC1{
 
         return estado;
     }
-    
+
     //obtener el numero decimal que representa el porcentaje del cupon
     public static double obtenerDecimal(double descuento) {
         double porcentaje;
@@ -298,176 +297,175 @@ public class  PrimeraPracticaIPC1{
 
         return porcentaje;
     }
-    
+
     public static void realizarVenta() {
         //Limpiar los arrays utilizados para facturar y almacenar datos temporales
         limpiarCarrito();
-        
-        if(productos[0][0] != null){
-            
-        String nombreCliente;
-        String nit;
-        double totalParcial = 0;
-        System.out.println("\n------Realizar venta------");
 
-        //obtener datos del cliente
-        System.out.print("-> Ingrese el nombre del cliente: ");
-        consola.nextLine();
-        nombreCliente = consola.nextLine();
-        
-        System.out.print("-> Ingrese el nit del cliente (deje en blanco para facturar como c/f): ");
-        nit = consola.nextLine();
-        
-        if (nit.equals("")) {
-            nit = "Consumidor final";
-        }
-        if (nombreCliente.equals("")) {
-            nombreCliente = "Consumidor final";
-        }
-        
-        //imprimir tabla de productos disponibles
-        System.out.println("\n******Productos disponibles******");
-        imprimirProductosSinCantidad();
+        if (productos[0][0] != null) {
 
-        System.out.println("\n**A continuacion escriba el numero de id del producto que desea agregar al carrito seguido de la cantidad \n  que se desea comprar de este.");
-        System.out.println("\n**Cuando haya terminado con todos los productos teclee **continuar** en el campo id y confirme que haya terminado\n");
-        
-        String id;
-        int cantidad;
-        String producto;
-        double precio;
-        int contadorCarrito = 0;
+            String nombreCliente;
+            String nit;
+            double totalParcial = 0;
+            System.out.println("\n------Realizar venta------");
 
-        //iniciar bucle que consultara los productos que se desean comprar
-        while (factura[19][0] == null) {
-            
-            System.out.print("-> Ingrese el numero de id correspondiente al producto que desea agregar (Se muestra en la tabla): ");
-            id = consola.next();
+            //obtener datos del cliente
+            System.out.print("-> Ingrese el nombre del cliente: ");
+            consola.nextLine();
+            nombreCliente = consola.nextLine();
 
-            //consultar nombre y precio del producto con la id dada
-            producto = buscarNombreProducto(id);
-            precio = buscarPrecioProducto(id);
+            System.out.print("-> Ingrese el nit del cliente (deje en blanco para facturar como c/f): ");
+            nit = consola.nextLine();
 
-            //Condicional para verificar si el usuario a terminado de tabular los datos
-            if (id.equals("continuar") || id.equals("Continuar")) {
-                String confirmacion;
-                System.out.print("-> Desea continuar con el siguiente paso de la factura (y/n): ");
-                confirmacion = consola.next();
-                if (confirmacion.equals("y") || confirmacion.equals("Y")) {
-                    break;
-                }
+            if (nit.equals("")) {
+                nit = "Consumidor final";
             }
-            
-            //Si el producto con la id dada existe agregarlo a la factura
-            if (producto != null) {
-                
-                //Iniciar trycatch para verificar que la cantidad ingresada sea un numero
-                //entero para evitar errores
-                try{
-                //consultar cantidad que se desea comprar
-                System.out.print("-> Ingrese la cantidad de \"" + producto + "\" que desea agregar: ");
-                cantidad = consola.nextInt();
-                
+            if (nombreCliente.equals("")) {
+                nombreCliente = "Consumidor final";
+            }
 
-                if (cantidad > 0) {
+            //imprimir tabla de productos disponibles
+            System.out.println("\n******Productos disponibles******");
+            imprimirProductosSinCantidad();
 
-                    //Si la antidad es mayor que 0 entonces se procederá a agregar el producto a la factura
-                    factura[contadorCarrito][0] = producto;
-                    factura[contadorCarrito][1] = Double.toString(precio);
-                    factura[contadorCarrito][2] = Integer.toString(cantidad);
-                    factura[contadorCarrito][3] = Double.toString(precio * cantidad);
-                    System.out.println("\n***Agregado al carrito con exito\n");
-                    contadorCarrito = contadorCarrito + 1;
-                    totalParcial = totalParcial + (precio * cantidad);
+            System.out.println("\n**A continuacion escriba el numero de id del producto que desea agregar al carrito seguido de la cantidad \n  que se desea comprar de este.");
+            System.out.println("\n**Cuando haya terminado con todos los productos teclee **continuar** en el campo id y confirme que haya terminado\n");
 
-                    //Sumar a cantidades vendidas la cantida vendida en la factura actual
-                    for (int i = 0; i <= 19; i++) {
+            String id;
+            int cantidad;
+            String producto;
+            double precio;
+            int contadorCarrito = 0;
 
-                        if (productos[i][0] != null) {
+            //iniciar bucle que consultara los productos que se desean comprar
+            while (factura[19][0] == null) {
 
-                            if (productos[i][0].equals(id)) {
-                                productos[i][3] = Integer.toString(Integer.parseInt(productos[i][3]) + cantidad);
+                System.out.print("-> Ingrese el numero de id correspondiente al producto que desea agregar (Se muestra en la tabla): ");
+                id = consola.next();
+
+                //consultar nombre y precio del producto con la id dada
+                producto = buscarNombreProducto(id);
+                precio = buscarPrecioProducto(id);
+
+                //Condicional para verificar si el usuario a terminado de tabular los datos
+                if (id.equals("continuar") || id.equals("Continuar")) {
+                    String confirmacion;
+                    System.out.print("-> Desea continuar con el siguiente paso de la factura (y/n): ");
+                    confirmacion = consola.next();
+                    if (confirmacion.equals("y") || confirmacion.equals("Y")) {
+                        break;
+                    }
+                }
+
+                //Si el producto con la id dada existe agregarlo a la factura
+                if (producto != null) {
+
+                    //Iniciar trycatch para verificar que la cantidad ingresada sea un numero
+                    //entero para evitar errores
+                    try {
+                        //consultar cantidad que se desea comprar
+                        System.out.print("-> Ingrese la cantidad de \"" + producto + "\" que desea agregar: ");
+                        cantidad = consola.nextInt();
+
+                        if (cantidad > 0) {
+
+                            //Si la antidad es mayor que 0 entonces se procederá a agregar el producto a la factura
+                            factura[contadorCarrito][0] = producto;
+                            factura[contadorCarrito][1] = Double.toString(precio);
+                            factura[contadorCarrito][2] = Integer.toString(cantidad);
+                            factura[contadorCarrito][3] = Double.toString(precio * cantidad);
+                            System.out.println("\n***Agregado al carrito con exito\n");
+                            contadorCarrito = contadorCarrito + 1;
+                            totalParcial = totalParcial + (precio * cantidad);
+
+                            //Sumar a cantidades vendidas la cantida vendida en la factura actual
+                            for (int i = 0; i <= 19; i++) {
+
+                                if (productos[i][0] != null) {
+
+                                    if (productos[i][0].equals(id)) {
+                                        productos[i][3] = Integer.toString(Integer.parseInt(productos[i][3]) + cantidad);
+
+                                    }
+                                }
 
                             }
+
+                        } else {
+                            System.out.println("\n***La cantidad debe ser mayor a 0\n");
                         }
+                    } catch (Exception e) {
+                        //Limpiando el scaner para consumir el salto de linea causado por el error
+                        consola.nextLine();
+                        System.out.println("\n**La cantidad debe ser un numero entero\n");
 
                     }
-
                 } else {
-                    System.out.println("\n***La cantidad debe ser mayor a 0\n");
+                    System.out.println("\n**No se encuentra ningun producto con la id " + id + "\n");
                 }
-                }catch(Exception e){
-                //Limpiando el scaner para consumir el salto de linea causado por el error
-                    consola.nextLine();
-                    System.out.println("\n**La cantidad debe ser un numero entero\n");
-                    
-                }
-            } else {
-                System.out.println("\n**No se encuentra ningun producto con la id " + id + "\n");
+
             }
 
-        }
-        
-        if(factura[19][0] != null){
-            System.out.println("**La lista carrito esta llena por lo que no se pueden agregar mas productos");
-        }
-
-        System.out.println("\nEl subtotal de la factura es Q" + totalParcial);
-
-        //ciclo para verificar cupon
-        boolean condicionCupon = false;
-        boolean cuponExiste = true;
-        double porcentajeDescuento = 0;
-
-        while (condicionCupon == false) {
-
-            System.out.print("\n-> Si tiene un codigo de descuento agregelo ahora (Si no cuenta con uno ingrese \"-\": ");
-            String codigoCupon = consola.next();
-
-            if (codigoCupon.equals("-")) {
-                break;
+            if (factura[19][0] != null) {
+                System.out.println("**La lista carrito esta llena por lo que no se pueden agregar mas productos");
             }
 
-            boolean estado = contarCaracteres(codigoCupon);
+            System.out.println("\nEl subtotal de la factura es Q" + totalParcial);
 
-            if (estado == true) {
+            //ciclo para verificar cupon
+            boolean condicionCupon = false;
+            boolean cuponExiste = true;
+            double porcentajeDescuento = 0;
 
-                for (int i = 0; i <= 19; i++) {
+            while (condicionCupon == false) {
 
-                    if (codigoCupon.equals(cupones[i][1])) {
+                System.out.print("\n-> Si tiene un codigo de descuento agregelo ahora (Si no cuenta con uno ingrese \"-\": ");
+                String codigoCupon = consola.next();
 
-                        cuponExiste = true;
-                        condicionCupon = true;
-                        porcentajeDescuento = Double.parseDouble(cupones[i][2]) / 100;
-                        break;
-                    } else {
-                        cuponExiste = false;
+                if (codigoCupon.equals("-")) {
+                    break;
+                }
 
+                boolean estado = contarCaracteres(codigoCupon);
+
+                if (estado == true) {
+
+                    for (int i = 0; i <= 19; i++) {
+
+                        if (codigoCupon.equals(cupones[i][1])) {
+
+                            cuponExiste = true;
+                            condicionCupon = true;
+                            porcentajeDescuento = Double.parseDouble(cupones[i][2]) / 100;
+                            break;
+                        } else {
+                            cuponExiste = false;
+
+                        }
                     }
+                } else {
+                    System.out.println("\n**El codigo debe tener 4 caracteres");
                 }
+
+                if (cuponExiste == false) {
+                    System.out.println("\n**El cupon ingresado no existe");
+                }
+            }
+
+            double totalFinal;
+            if (porcentajeDescuento != 0) {
+
+                totalFinal = totalParcial - totalParcial * porcentajeDescuento;
+
             } else {
-                System.out.println("\n**El codigo debe tener 4 caracteres");
+
+                totalFinal = totalParcial;
+
             }
 
-            if (cuponExiste == false) {
-                System.out.println("\n**El cupon ingresado no existe");
-            }
-        }
-
-        double totalFinal;
-        if (porcentajeDescuento != 0) {
-
-            totalFinal = totalParcial - totalParcial * porcentajeDescuento;
-
+            generarFactura(totalFinal, totalParcial, porcentajeDescuento * 100, nombreCliente, nit);
+            //Continuacion de la factura
         } else {
-
-            totalFinal = totalParcial;
-
-        }
-
-        generarFactura(totalFinal, totalParcial, porcentajeDescuento * 100, nombreCliente, nit);
-        //Continuacion de la factura
-        }else{
             System.out.println("\n*No hay ningun producto creado, no se puede continuar con la venta*");
             mostrarMenu();
         }
@@ -498,6 +496,7 @@ public class  PrimeraPracticaIPC1{
         }
 
     }
+
     //Metodo para buscar el nombre de un producto segun su id
     public static String buscarNombreProducto(String id) {
         String nombre = null;
@@ -513,7 +512,7 @@ public class  PrimeraPracticaIPC1{
 
         return nombre;
     }
-    
+
     //metodo para buscar el precio de un producto segun su id
     public static double buscarPrecioProducto(String id) {
         double precio = 0;
@@ -529,8 +528,7 @@ public class  PrimeraPracticaIPC1{
 
         return precio;
     }
-    
-    
+
     public static void realizarReporte() {
         System.out.println("\n------Reporte------");
         ordenarArray(productos);
@@ -538,7 +536,7 @@ public class  PrimeraPracticaIPC1{
         mostrarMenu();
     }
 
-       //imprimir el aray productos sin mostrar la cantidad vendida
+    //imprimir el aray productos sin mostrar la cantidad vendida
     public static void imprimirProductosConCantidad() {
 
         System.out.println();
@@ -560,7 +558,6 @@ public class  PrimeraPracticaIPC1{
 
     }
 
-    
     //imprimir el array productos mostrando la cantidad vendidad
     public static void imprimirProductosSinCantidad() {
 
@@ -604,7 +601,7 @@ public class  PrimeraPracticaIPC1{
         }
 
     }
-      
+
     //imprimir la tabla con los productos vendidos junto a la cantidad y el total
     public static void imprimirFacturaP() {
 
@@ -627,7 +624,6 @@ public class  PrimeraPracticaIPC1{
 
     }
 
-    
     //Metodo para ordenar el array de productos en forma descendente basado en el ordenamiento de burbuja
     public static void ordenarArray(String[][] a) {
 
@@ -668,8 +664,7 @@ public class  PrimeraPracticaIPC1{
     }
 
     //funcion que devuelve la fecha actual - No se utilizo para evitar el uso de librerias
-    
-  /*  public static String obtenerFecha() {
+    /*  public static String obtenerFecha() {
 
         String unido;
         Calendar c = Calendar.getInstance();
@@ -682,5 +677,5 @@ public class  PrimeraPracticaIPC1{
 
         return unido;
     }
-*/
+     */
 }
