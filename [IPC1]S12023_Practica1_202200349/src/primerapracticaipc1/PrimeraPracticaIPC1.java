@@ -57,9 +57,9 @@ public class  PrimeraPracticaIPC1{
         String user;
         String pass;
 
-        System.out.print("Ingresa el nombre de usuario: ");
+        System.out.print("-> Ingresa el nombre de usuario: ");
         user = consola.nextLine();
-        System.out.print("Ingresa la contraseña: ");
+        System.out.print("-> Ingresa la contraseña: ");
         pass = consola.nextLine();
 
         if (user.equals(usuario) && pass.equals(contraseña)) {
@@ -85,7 +85,7 @@ public class  PrimeraPracticaIPC1{
             System.out.println("5. Salir del programa");
 
             //leer opcion elegida por el usuario
-            System.out.print("\nIngrese el *numero* de la opción a la que desea ingresar: ");
+            System.out.print("\n-> Ingrese el *numero* de la opción a la que desea ingresar: ");
             opcion = consola.next();
 
             //enviar al usuario al modulo seleccionado
@@ -112,7 +112,9 @@ public class  PrimeraPracticaIPC1{
     }
     
     public static void mostrarProductos() {
-
+        
+        if(productos[19][0] == null){
+        
         boolean condicion = true;
         boolean existe = false;
         String nombre;
@@ -120,19 +122,25 @@ public class  PrimeraPracticaIPC1{
 
         //Ciclo que se repetira hasta que el usuario desee salir o hasta que se agregue un producto correctamente
         while (condicion == true) {
-
+            
             //imprimir texto
             System.out.println("\n------Agregar producto------");
             System.out.println("*Si desea volver al menu deje el campo nombre en blanco y el precio en 0\n");
 
             //leer nombre y precio del producto
-            System.out.print("Ingrese el nombre del producto: ");
+            System.out.print("-> Ingrese el nombre del producto: ");
             //limpiando el scanner
             consola.nextLine();
             nombre = consola.nextLine();
-            System.out.print("Ingrese el precio del producto (unicamente valor numerico sin separador de miles): ");
+            
+            try{
+                
+            System.out.print("-> Ingrese el precio del producto (unicamente valor numerico sin separador de miles): ");
             precio = consola.nextDouble();
-
+            
+            }catch(Exception e){
+                precio=-1;
+            }
             //Verificando si el usuario desea salir
             if (nombre.equals("") && precio == 0) {
                 condicion = false;
@@ -145,6 +153,8 @@ public class  PrimeraPracticaIPC1{
                 System.out.println("\n***Ambos campos deben tener informacion y el precio no puede ser 0");
 
                 //Si ambos campos tienen datos y el usuario no desea salir, verificar para agregar el nuevo producto    
+            }else if (precio<0){
+                 System.out.println("\nEl precio debe ser un valor numerico mayor a 0*");
             } else {
 
                 //ciclo para revisar que el producto ingresado no exista aun en el vector
@@ -181,10 +191,16 @@ public class  PrimeraPracticaIPC1{
             }
 
         }
-
+        }else{
+            System.out.println("\n*La lista esta llena, no se pueden agregar mas productos");
+            mostrarMenu();
+        }
     }
 
     public static void mostrarCupones() {
+        
+        if(productos[19][0] == null){
+        
         boolean condicion = true;
         boolean caracteres;
         boolean existe = false;
@@ -198,11 +214,11 @@ public class  PrimeraPracticaIPC1{
             System.out.println("*Si desea volver al menu coloque un numero 0 en el campo cupon y porcentaje\n");
 
             //leer nombre y porcentaje del cupon
-            System.out.print("Ingrese el codigo del cupon (unicamente 4 caracteres): ");
+            System.out.print("-> Ingrese el codigo del cupon (unicamente 4 caracteres): ");
             //limpiando el scanner
             consola.nextLine();
             cupon = consola.nextLine();
-            System.out.print("Ingrese el valor numerico (Entre 0 y 100) del porcentaje de descuento que otorga este cupon (sin simbolo %): ");
+            System.out.print("-> Ingrese el valor numerico (Entre 0 y 100) del porcentaje de descuento que otorga este cupon (sin simbolo %): ");
             descuento = consola.nextDouble();
 
             //verificando restricciones
@@ -255,6 +271,10 @@ public class  PrimeraPracticaIPC1{
             }
 
         }
+        }else{
+            System.out.println("\n*La lista esta llena, no se pueden agregar mas cupones");
+            mostrarMenu();
+        }
     }
 
     //Contar si el cupon tiene exactamente cuatro caracteres
@@ -291,11 +311,11 @@ public class  PrimeraPracticaIPC1{
         System.out.println("\n------Realizar venta------");
 
         //obtener datos del cliente
-        System.out.print("Ingrese el nombre del cliente: ");
+        System.out.print("-> Ingrese el nombre del cliente: ");
         consola.nextLine();
         nombreCliente = consola.nextLine();
         
-        System.out.print("Ingrese el nit del cliente (deje en blanco para facturar como c/f): ");
+        System.out.print("-> Ingrese el nit del cliente (deje en blanco para facturar como c/f): ");
         nit = consola.nextLine();
         
         if (nit.equals("")) {
@@ -309,10 +329,8 @@ public class  PrimeraPracticaIPC1{
         System.out.println("\n******Productos disponibles******");
         imprimirProductosSinCantidad();
 
-        boolean condicion = true;
-
-        System.out.println("\nA continuacion escriba el numero de id del producto que desea agregar al carrito seguido de la cantidad que se desea comprar de este");
-        System.out.println("Cuando haya terminado con todos los productos teclee **continuar** en el campo id y confirme que haya terminado\n");
+        System.out.println("\n**A continuacion escriba el numero de id del producto que desea agregar al carrito seguido de la cantidad \n  que se desea comprar de este.");
+        System.out.println("\n**Cuando haya terminado con todos los productos teclee **continuar** en el campo id y confirme que haya terminado\n");
         
         String id;
         int cantidad;
@@ -321,9 +339,9 @@ public class  PrimeraPracticaIPC1{
         int contadorCarrito = 0;
 
         //iniciar bucle que consultara los productos que se desean comprar
-        while (condicion == true) {
+        while (factura[19][0] == null) {
             
-            System.out.print("Ingrese el numero de id correspondiente al producto que desea agregar (Se muestra en la tabla): ");
+            System.out.print("-> Ingrese el numero de id correspondiente al producto que desea agregar (Se muestra en la tabla): ");
             id = consola.next();
 
             //consultar nombre y precio del producto con la id dada
@@ -333,7 +351,7 @@ public class  PrimeraPracticaIPC1{
             //Condicional para verificar si el usuario a terminado de tabular los datos
             if (id.equals("continuar") || id.equals("Continuar")) {
                 String confirmacion;
-                System.out.print("Desea continuar con el siguiente paso de la factura (y/n): ");
+                System.out.print("-> Desea continuar con el siguiente paso de la factura (y/n): ");
                 confirmacion = consola.next();
                 if (confirmacion.equals("y") || confirmacion.equals("Y")) {
                     break;
@@ -347,7 +365,7 @@ public class  PrimeraPracticaIPC1{
                 //entero para evitar errores
                 try{
                 //consultar cantidad que se desea comprar
-                System.out.print("Ingrese la cantidad de \"" + producto + "\" que desea agregar: ");
+                System.out.print("-> Ingrese la cantidad de \"" + producto + "\" que desea agregar: ");
                 cantidad = consola.nextInt();
                 
 
@@ -389,6 +407,10 @@ public class  PrimeraPracticaIPC1{
             }
 
         }
+        
+        if(factura[19][0] != null){
+            System.out.println("**La lista carrito esta llena por lo que no se pueden agregar mas productos");
+        }
 
         System.out.println("\nEl subtotal de la factura es Q" + totalParcial);
 
@@ -399,7 +421,7 @@ public class  PrimeraPracticaIPC1{
 
         while (condicionCupon == false) {
 
-            System.out.print("\nSi tiene un codigo de descuento agregelo ahora (Si no cuenta con uno ingrese \"-\": ");
+            System.out.print("\n-> Si tiene un codigo de descuento agregelo ahora (Si no cuenta con uno ingrese \"-\": ");
             String codigoCupon = consola.next();
 
             if (codigoCupon.equals("-")) {
