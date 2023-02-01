@@ -84,7 +84,7 @@ public class  PrimeraPracticaIPC1{
             System.out.println("4. Realizar reporte");
             System.out.println("5. Salir del programa");
 
-            //leer opcion elejida por el usuario
+            //leer opcion elegida por el usuario
             System.out.print("\nIngrese el *numero* de la opción a la que desea ingresar: ");
             opcion = consola.next();
 
