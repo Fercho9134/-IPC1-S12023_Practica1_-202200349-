@@ -4,6 +4,6 @@ Nombre: Irving Fernando Alvarado Asensio
 
 Carné: 202200349
 
-Curso: Introducción a la programación y computación 2
+Curso: Introducción a la programación y computación 1
 
 Sección: D
