@@ -306,6 +306,7 @@ public class PrimeraPracticaIPC1 {
 
             String nombreCliente;
             String nit;
+            String fecha;
             double totalParcial = 0;
             System.out.println("\n------Realizar venta------");
 
@@ -316,6 +317,9 @@ public class PrimeraPracticaIPC1 {
 
             System.out.print("-> Ingrese el nit del cliente (deje en blanco para facturar como c/f): ");
             nit = consola.nextLine();
+            
+            System.out.print("-> Ingrese la fecha actual en formato mm/dd/aaaa: ");
+            fecha = consola.nextLine();
 
             if (nit.equals("")) {
                 nit = "Consumidor final";
@@ -463,7 +467,7 @@ public class PrimeraPracticaIPC1 {
 
             }
 
-            generarFactura(totalFinal, totalParcial, porcentajeDescuento * 100, nombreCliente, nit);
+            generarFactura(totalFinal, totalParcial, porcentajeDescuento * 100, nombreCliente, nit,fecha);
             //Continuacion de la factura
         } else {
             System.out.println("\n*No hay ningun producto creado, no se puede continuar con la venta*");
@@ -471,18 +475,26 @@ public class PrimeraPracticaIPC1 {
         }
     }
 
-    public static void generarFactura(double totalFinal, double subtotal, double porcentajeDescuento, String nombreCliente, String nit) {
+    public static void generarFactura(double totalFinal, double subtotal, double porcentajeDescuento, String nombreCliente, String nit, String fecha) {
         //Imprimir factura
-        System.out.println("\n***************SUPER-25***************");
+        System.out.println("\n***********************************");
+        System.out.println("            SUPER-25");
+        System.out.println("***********************************");
         System.out.println("Nombre del cajero: Irving Alvarado");
         System.out.println("Nombre del cliente: " + nombreCliente);
         System.out.println("Numero de nit: " + nit);
-        System.out.println("Fecha: 10/02/2023");
+        System.out.println("Fecha: " + fecha);
+        System.out.println("***********************************");
+        System.out.println("***********************************");
         imprimirFacturaP();
-        System.out.println("");
+        System.out.println("***********************************");
+        System.out.println("***********************************");
         System.out.println("Subtotal: Q" + subtotal);
         System.out.println("Porcentaje de descuento: " + porcentajeDescuento + "%");
         System.out.println("Total: Q" + totalFinal);
+        System.out.println("***********************************");
+        System.out.println("          Vuelva pronto");
+        System.out.println("***********************************");
         mostrarMenu();
     }
 
@@ -604,15 +616,13 @@ public class PrimeraPracticaIPC1 {
 
     //imprimir la tabla con los productos vendidos junto a la cantidad y el total
     public static void imprimirFacturaP() {
-
-        System.out.println();
         //Imprimiendo encabezado
-        System.out.println("Nombre\t\tPrecio\t\tCant.\t\tTotal");
+        System.out.println("Nombre\tPrecio\tCant.\tTotal");
         //Ciclos aninados para imprimir la matriz
         for (int i = 0; i <= 19; i++) {
             for (int j = 0; j <= 3; j++) {
                 if (factura[i][j] != null) {
-                    System.out.print(factura[i][j] + "\t\t");
+                    System.out.print(factura[i][j] + "\t");
                 } else {
                     //Saliendo del metodo si aun no se han agregado datos en las celdas actuales del array
                     return;
