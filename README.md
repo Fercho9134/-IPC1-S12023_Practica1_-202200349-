@@ -6,4 +6,4 @@ Carné: 202200349
 
 Curso: Introducción a la programación y computación 1
 
-Sección: D
+Sección: C
